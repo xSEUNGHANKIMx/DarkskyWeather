@@ -10,17 +10,17 @@ public class RetrofitSetup {
 
     private static final String URL = "https://api.darksky.net/forecast";
     private static final String SECRET_KEY = "9ddb5bc933606669297dc963fbd3574b";
-    private static Retrofit retrofit = null;
+    private static Retrofit mRetrofit = null;
 
     public static Retrofit retrofit(){
-        if (retrofit == null){
-            retrofit = new Retrofit.Builder()
+        if (mRetrofit == null){
+            mRetrofit = new Retrofit.Builder()
                     .baseUrl(URL + File.separator + SECRET_KEY + File.separator)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build();
         }
-        return retrofit;
+        return mRetrofit;
     }
 }
 

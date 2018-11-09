@@ -15,12 +15,9 @@ import com.google.gson.Gson;
 import com.seankim.darkskyweather.Models.WeatherDataModel;
 import com.seankim.darkskyweather.R;
 import com.seankim.darkskyweather.Utils.SeparatorDeco;
-import com.seankim.darkskyweather.Utils.WeatherTime;
+import com.seankim.darkskyweather.Utils.TimeUtils;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,15 +43,15 @@ public class DailyWeatherDetailActivity extends AppCompatActivity {
         // data to populate the RecyclerView with
         Gson gson = new Gson();
         String jsonData = getIntent().getStringExtra("detailData");
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         map = (HashMap<String,Object>) gson.fromJson(jsonData, map.getClass());
 
         for(String key : map.keySet()) {
-            String item = "";
+            String item;
             Object value = map.get(key);
             if(key.toLowerCase().contains("time")) {
                 Integer millis = Integer.valueOf(((Double) value).intValue());
-                item = key + " : " + WeatherTime.getTime(millis);
+                item = key + " : " + TimeUtils.getTime(millis);
             } else {
                 item = key + " : " + value.toString();
             }

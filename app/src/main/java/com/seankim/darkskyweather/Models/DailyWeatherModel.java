@@ -9,36 +9,36 @@ public class DailyWeatherModel {
 
     @SerializedName("summary")
     @Expose
-    private String summary;
+    private String mSummary;
     @SerializedName("icon")
     @Expose
-    private String icon;
+    private String mIcon;
     @SerializedName("data")
     @Expose
-    private List<WeatherDataModel> datas = null;
+    private List<WeatherDataModel> mDataList = null;
 
     public String getSummary() {
-        return summary;
+        return mSummary;
     }
 
     public void setSummary(String summary) {
-        this.summary = summary;
+        this.mSummary = summary;
     }
 
     public String getIcon() {
-        return icon;
+        return mIcon;
     }
 
     public void setIcon(String icon) {
-        this.icon = icon;
+        this.mIcon = icon;
     }
 
     public List<WeatherDataModel> getData() {
-        return datas;
+        return mDataList;
     }
 
     public void setData(List<WeatherDataModel> data) {
-        this.datas = data;
+        this.mDataList = data;
     }
 
 }

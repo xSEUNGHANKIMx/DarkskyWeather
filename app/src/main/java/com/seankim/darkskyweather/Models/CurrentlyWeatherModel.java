@@ -7,47 +7,47 @@ public class CurrentlyWeatherModel {
 
     @SerializedName("time")
     @Expose
-    private Integer time;
+    private Integer mTime;
     @SerializedName("summary")
     @Expose
-    private String summary;
+    private String mSummary;
     @SerializedName("icon")
     @Expose
-    private String icon;
+    private String mIcon;
     @SerializedName("temperature")
     @Expose
-    private Double temperature;
+    private Double mTemperature;
 
     public Integer getTime() {
-        return time;
+        return mTime;
     }
 
     public void setTime(Integer time) {
-        this.time = time;
+        this.mTime = time;
     }
 
     public String getSummary() {
-        return summary;
+        return mSummary;
     }
 
     public void setSummary(String summary) {
-        this.summary = summary;
+        this.mSummary = summary;
     }
 
     public String getIcon() {
-        return icon;
+        return mIcon;
     }
 
     public void setIcon(String icon) {
-        this.icon = icon;
+        this.mIcon = icon;
     }
 
     public Double getTemperature() {
-        return temperature;
+        return mTemperature;
     }
 
     public void setTemperature(Double temperature) {
-        this.temperature = temperature;
+        this.mTemperature = temperature;
     }
 
 }

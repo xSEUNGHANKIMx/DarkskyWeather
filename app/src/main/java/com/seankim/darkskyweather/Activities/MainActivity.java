@@ -25,9 +25,8 @@ import com.seankim.darkskyweather.Models.WeatherModel;
 import com.seankim.darkskyweather.Net.WeatherNet;
 import com.seankim.darkskyweather.R;
 import com.seankim.darkskyweather.Utils.SeparatorDeco;
-import com.seankim.darkskyweather.Utils.TouchListener;
 import com.seankim.darkskyweather.Utils.WeatherIcons;
-import com.seankim.darkskyweather.Utils.WeatherTime;
+import com.seankim.darkskyweather.Utils.TimeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.addItemDecoration(decoration);
 
         mBtnRefresh.setOnClickListener(mRefreshBtnClickListener);
-        mUpdateAnim = AnimationUtils.loadAnimation(this, R.anim.refresh_rotate_anim);
+        mUpdateAnim = AnimationUtils.loadAnimation(this, R.anim.anim_refresh_rotate);
         mBtnRefresh.startAnimation(mUpdateAnim);
 
         getWeather();
@@ -144,9 +143,9 @@ public class MainActivity extends AppCompatActivity {
         public void onBindViewHolder(DailyReportViewHolder holder, final int position) {
             WeatherDataModel dailyData = mDailyWeatherDataModel.get(position);
 
-            String day = WeatherTime.getDayOfWeek(dailyData.getTime());
+            String day = TimeUtils.getDayOfWeek(dailyData.getTime());
             holder.setWeekday(day);
-            String date = WeatherTime.getDate(dailyData.getTime());
+            String date = TimeUtils.getDate(dailyData.getTime());
             holder.setDate(date);
             holder.setIcon(dailyData.getIcon());
             Double tempHigh = dailyData.getTemperatureHigh();

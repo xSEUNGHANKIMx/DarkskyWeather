@@ -7,13 +7,13 @@ import rx.Observable;
 import rx.schedulers.Schedulers;
 
 public class WeatherNet {
-    private static final WeatherService weatherService;
+    private static final WeatherService mWeatherService;
 
     static {
-        weatherService = RetrofitSetup.retrofit().create(WeatherService.class);
+        mWeatherService = RetrofitSetup.retrofit().create(WeatherService.class);
     }
 
     public static Observable<Response<WeatherModel>> getWeather(double lat, double lon) {
-        return weatherService.getWeather(lat, lon).subscribeOn(Schedulers.io());
+        return mWeatherService.getWeather(lat, lon).subscribeOn(Schedulers.io());
     }
 }

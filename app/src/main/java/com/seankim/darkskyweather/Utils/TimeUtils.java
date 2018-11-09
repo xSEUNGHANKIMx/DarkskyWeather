@@ -10,17 +10,17 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class WeatherTime {
-    private static Map<Integer, String> days = new HashMap<>();
+public class TimeUtils {
+    private static Map<Integer, String> mDays = new HashMap<>();
 
     static {
-        days.put(2, "MON");
-        days.put(3, "TUES");
-        days.put(4, "WED");
-        days.put(5, "THU");
-        days.put(6, "FRI");
-        days.put(7, "SAT");
-        days.put(1, "SUN");
+        mDays.put(2, "MON");
+        mDays.put(3, "TUES");
+        mDays.put(4, "WED");
+        mDays.put(5, "THU");
+        mDays.put(6, "FRI");
+        mDays.put(7, "SAT");
+        mDays.put(1, "SUN");
     }
 
     public static String getDayOfWeek(Integer dateInt) {
@@ -31,11 +31,11 @@ public class WeatherTime {
             Date now = format.parse(format.format(nowTimeLong));
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(now);
-            return days.get(calendar.get(Calendar.DAY_OF_WEEK));
+            return mDays.get(calendar.get(Calendar.DAY_OF_WEEK));
         } catch (ParseException e) {
 
         }
-        return days.get(Calendar.DAY_OF_WEEK);
+        return mDays.get(Calendar.DAY_OF_WEEK);
     }
 
     public static String getDate(Integer dateInt) {

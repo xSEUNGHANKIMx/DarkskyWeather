@@ -13,10 +13,10 @@ public class WeatherModel {
     private Double longitude;
     @SerializedName("currently")
     @Expose
-    private CurrentlyWeatherModel currently;
+    private CurrentlyWeatherModel mCurrent;
     @SerializedName("daily")
     @Expose
-    private DailyWeatherModel daily;
+    private DailyWeatherModel mDaily;
 
     public Double getLatitude() {
         return latitude;
@@ -35,19 +35,19 @@ public class WeatherModel {
     }
 
     public CurrentlyWeatherModel getCurrently() {
-        return currently;
+        return mCurrent;
     }
 
     public void setCurrently(CurrentlyWeatherModel currently) {
-        this.currently = currently;
+        this.mCurrent = currently;
     }
 
     public DailyWeatherModel getDaily() {
-        return daily;
+        return mDaily;
     }
 
     public void setDaily(DailyWeatherModel daily) {
-        this.daily = daily;
+        this.mDaily = daily;
     }
 }
 
