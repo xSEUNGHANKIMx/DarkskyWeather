@@ -6,8 +6,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.support.v4.app.ActivityCompat;
 import android.content.Context;
-import android.graphics.Color;
-import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,13 +21,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.seankim.darkskyweather.DarkskyWeatherApplication;
 import com.seankim.darkskyweather.Models.CurrentlyWeatherModel;
 import com.seankim.darkskyweather.Models.WeatherDataModel;
 import com.seankim.darkskyweather.Models.WeatherModel;
 import com.seankim.darkskyweather.Net.WeatherNet;
 import com.seankim.darkskyweather.R;
-import com.seankim.darkskyweather.Utils.ProgressFlower;
 import com.seankim.darkskyweather.Utils.TouchListener;
 import com.seankim.darkskyweather.Utils.WeatherIcons;
 import com.seankim.darkskyweather.Utils.WeatherTime;
@@ -52,8 +48,6 @@ public class MainActivity extends AppCompatActivity {
     final private double mLatitude = 32.715736;
     final private double mLongitude = -117.161087;
     private LayoutInflater mInflater;
-    private Context mContext;
-    private ProgressFlower mProgress;
     private List<WeatherDataModel> mDailyWeatherDataModel = new ArrayList<>();
     private DailyReportAdapter mDailyReportAdapter = new DailyReportAdapter();
     private Animation mUpdateAnim;
@@ -75,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mContext = this;
         mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
@@ -97,24 +90,13 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener mRefreshBtnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            mBtnRefresh.startAnimation(mUpdateAnim);
-            MainActivityPermissionsDispatcher.getWeatherWithPermissionCheck(MainActivity.this);
+            getWeather();
         }
     };
 
-    @SuppressLint("NeedOnRequestPermissionsResult")
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == 0) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            }
-        }
-    }
-
     @NeedsPermission(Manifest.permission.INTERNET)
     public void getWeather() {
-        mProgress = new ProgressFlower.Builder(this).direction(ProgressFlower.DIRECT_CLOCKWISE).themeColor(Color.WHITE).build();
-        mProgress.show();
+        mBtnRefresh.startAnimation(mUpdateAnim);
 
         WeatherNet.getWeather(mLatitude, mLongitude).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<Response<WeatherModel>>() {
             @Override
@@ -137,20 +119,18 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         Log.e(TAG, "No response, check your key");
                     }
-                    mProgress.dismiss();
                     mBtnRefresh.clearAnimation();
                 }
             }
 
             @Override
             public void onCompleted() {
-
+                mBtnRefresh.clearAnimation();
             }
 
             @Override
             public void onError(Throwable e) {
-                Log.e(TAG, "onFailure, unable to get weather data");
-                mProgress.dismiss();
+                mBtnRefresh.clearAnimation();
             }
         });
     }
@@ -205,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
             root.getLayoutParams().width = screenSize().x * 120 / 375;
 
             root.setOnTouchListener(touchListener);
-//            icon.setOnTouchListener(touchListener);
         }
 
         public void setIcon(String resource) {
@@ -218,11 +197,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void setTempHigh(String temp) {
-            this.tempHigh.setText(temp + "\u00b0C");
+            this.tempHigh.setText(temp + "\u00b0F");
         }
 
         public void setTempLow(String temp) {
-            this.tempLow.setText(temp + "\u00b0C");
+            this.tempLow.setText(temp + "\u00b0F");
         }
 
         public void setWeekday(String weekday) {

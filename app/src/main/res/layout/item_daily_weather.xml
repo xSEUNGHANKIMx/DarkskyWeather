@@ -77,7 +77,7 @@
             android:layout_weight="50"
             android:gravity="center"
             android:textSize="16sp"
-            tools:text="22\u00b0C" />
+            tools:text="22\u00b0F" />
 
         <TextView
             android:layout_width="0dp"
@@ -94,7 +94,7 @@
             android:layout_weight="50"
             android:gravity="center"
             android:textSize="16sp"
-            tools:text="28\u00b0C" />
+            tools:text="28\u00b0F" />
 
         <View
             android:layout_width="0dp"

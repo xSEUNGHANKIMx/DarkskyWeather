@@ -10,7 +10,7 @@ public class WeatherNet {
     private static final WeatherService weatherService;
 
     static {
-        weatherService = RetrofitConfig.retrofit().create(WeatherService.class);
+        weatherService = RetrofitSetup.retrofit().create(WeatherService.class);
     }
 
     public static Observable<Response<WeatherModel>> getWeather(double lat, double lon) {
