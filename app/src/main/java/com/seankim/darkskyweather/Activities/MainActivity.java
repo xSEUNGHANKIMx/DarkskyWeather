@@ -1,25 +1,24 @@
 package com.seankim.darkskyweather.Activities;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.support.v4.app.ActivityCompat;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.seankim.darkskyweather.Models.CurrentlyWeatherModel;
 import com.seankim.darkskyweather.Models.WeatherDataModel;
 import com.seankim.darkskyweather.Models.WeatherModel;
@@ -134,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private class DailyReportAdapter extends RecyclerView.Adapter<DailyReportViewHolder> {
+    class DailyReportAdapter extends RecyclerView.Adapter<DailyReportViewHolder> {
         @Override
         public DailyReportViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = mInflater.inflate(R.layout.item_daily_weather, parent, false);
@@ -142,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(DailyReportViewHolder holder, int position) {
+        public void onBindViewHolder(DailyReportViewHolder holder, final int position) {
             WeatherDataModel dailyData = mDailyWeatherDataModel.get(position);
 
             String day = WeatherTime.getDayOfWeek(dailyData.getTime());
@@ -155,33 +154,44 @@ public class MainActivity extends AppCompatActivity {
             Double tempLow = dailyData.getTemperatureLow();
             holder.setTempLow(String.format("%.1f", tempLow));
             holder.setSummary(dailyData.getSummary());
+
+            // add click listener
+            holder.holder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), DailyWeatherDetailActivity.class);
+                    Gson gson = new Gson();
+                    String jsonData = gson.toJson(mDailyWeatherDataModel.get(position));
+                    intent.putExtra("detailData", jsonData);
+                    startActivity(intent);
+                }
+            });
         }
 
         @Override
         public int getItemCount() {
             return mDailyWeatherDataModel.size();
         }
+
+
     }
 
-
-    public class DailyReportViewHolder extends RecyclerView.ViewHolder {
+    class DailyReportViewHolder extends RecyclerView.ViewHolder {
         View holder;
         ImageView icon;
         TextView date, weekday, tempHigh, tempLow, summary;
-        TouchListener touchListener = new TouchListener();
+        //TouchListener touchListener = new TouchListener();
 
         DailyReportViewHolder(View view) {
             super(view);
             holder = view.findViewById(R.id.item_daily_info_holder);
 
-            date = view.findViewById(R.id.item_daily_info_date);
-            weekday = view.findViewById(R.id.item_daily_info_weekday);
-            icon = view.findViewById(R.id.item_daily_info_icon);
-            tempHigh = view.findViewById(R.id.item_daily_info_temp_high);
-            tempLow = view.findViewById(R.id.item_daily_info_temp_low);
-            summary = view.findViewById(R.id.item_daily_info_summary);
-
-            holder.setOnTouchListener(touchListener);
+            date = view.findViewById(R.id.tv_daily_info_date);
+            weekday = view.findViewById(R.id.tv_daily_info_weekday);
+            icon = view.findViewById(R.id.ic_daily_info_icon);
+            tempHigh = view.findViewById(R.id.tv_daily_info_temp_high);
+            tempLow = view.findViewById(R.id.tv_daily_info_temp_low);
+            summary = view.findViewById(R.id.tv_daily_info_summary);
         }
 
         public void setDate(String date) {

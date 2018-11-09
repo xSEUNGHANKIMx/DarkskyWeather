@@ -24,7 +24,7 @@ public class WeatherTime {
     }
 
     public static String getDayOfWeek(Integer dateInt) {
-        long nowTimeLong = new Long(dateInt).longValue() * 1000;
+        Long nowTimeLong = new Long(dateInt).longValue() * 1000;
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
 
         try {
@@ -39,7 +39,7 @@ public class WeatherTime {
     }
 
     public static String getDate(Integer dateInt) {
-        long nowTimeLong = new Long(dateInt).longValue() * 1000;
+        Long nowTimeLong = new Long(dateInt).longValue() * 1000;
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
 
         try {
@@ -47,6 +47,19 @@ public class WeatherTime {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(nowTimeDate);
             return calendar.get(Calendar.MONTH) + 1 + File.separator + calendar.get(Calendar.DAY_OF_MONTH);
+        } catch (ParseException e) {
+
+        }
+        return "";
+    }
+
+    public static String getTime(Integer dateInt) {
+        Long nowTimeLong = new Long(dateInt).longValue() * 1000;
+        DateFormat formatter = new SimpleDateFormat("HH:mm", Locale.US);
+
+        try {
+            Date nowTimeDate = formatter.parse(formatter.format(nowTimeLong));
+            return formatter.format(nowTimeDate);
         } catch (ParseException e) {
 
         }

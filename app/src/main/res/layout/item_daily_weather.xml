@@ -13,7 +13,7 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/item_daily_info_date"
+            android:id="@+id/tv_daily_info_date"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="50"
@@ -21,7 +21,7 @@
             android:textSize="15dp"/>
 
         <TextView
-            android:id="@+id/item_daily_info_weekday"
+            android:id="@+id/tv_daily_info_weekday"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="50"
@@ -36,7 +36,7 @@
         android:layout_weight="20">
 
         <ImageView
-            android:id="@+id/item_daily_info_icon"
+            android:id="@+id/ic_daily_info_icon"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
@@ -59,7 +59,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/item_daily_info_temp_low"
+                android:id="@+id/tv_daily_info_temp_low"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center|left"
@@ -67,7 +67,7 @@
                 android:textSize="15dp"/>
 
             <TextView
-                android:id="@+id/item_daily_info_temp_high"
+                android:id="@+id/tv_daily_info_temp_high"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center|left"
@@ -76,7 +76,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/item_daily_info_summary"
+            android:id="@+id/tv_daily_info_summary"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="65"
