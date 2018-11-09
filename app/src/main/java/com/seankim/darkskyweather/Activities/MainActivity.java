@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,11 +52,11 @@ public class MainActivity extends AppCompatActivity {
     final private double mLatitude = 32.715736;
     final private double mLongitude = -117.161087;
     private LayoutInflater mInflater;
-    private Animation mUpdateAnim;
     private Context mContext;
     private ProgressFlower mProgress;
     private List<WeatherDataModel> mDailyWeatherDataModel = new ArrayList<>();
     private DailyReportAdapter mDailyReportAdapter = new DailyReportAdapter();
+    private Animation mUpdateAnim;
 
     @BindView(R.id.icTodaysWeather)
     ImageView mIconTodaysWeather;
@@ -85,8 +86,21 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
+
+        mBtnRefresh.setOnClickListener(mRefreshBtnClickListener);
+        mUpdateAnim = AnimationUtils.loadAnimation(this, R.anim.refresh_rotate_anim);
+        mBtnRefresh.startAnimation(mUpdateAnim);
+
         getWeather();
     }
+
+    private View.OnClickListener mRefreshBtnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            mBtnRefresh.startAnimation(mUpdateAnim);
+            MainActivityPermissionsDispatcher.getWeatherWithPermissionCheck(MainActivity.this);
+        }
+    };
 
     @SuppressLint("NeedOnRequestPermissionsResult")
     @Override
@@ -96,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 
     @NeedsPermission(Manifest.permission.INTERNET)
     public void getWeather() {
@@ -125,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.e(TAG, "No response, check your key");
                     }
                     mProgress.dismiss();
+                    mBtnRefresh.clearAnimation();
                 }
             }
 
