@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
 
-        <activity android:name=".Activities.MainActivity" >
+        <activity android:name=".Activities.MainActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +23,9 @@
         </activity>
         <activity android:name=".Activities.DailyWeatherDetailActivity"
             android:label="Daily Weather Detail"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" >
         </activity>
     </application>
 
