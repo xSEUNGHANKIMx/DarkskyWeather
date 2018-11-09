@@ -24,7 +24,7 @@
         <activity android:name=".Activities.DailyWeatherDetailActivity"
             android:label="Daily Weather Detail"
             android:theme="@style/AppTheme"
-            android:configChanges="orientation"
+			android:configChanges="orientation"
             android:screenOrientation="portrait" >
         </activity>
     </application>
