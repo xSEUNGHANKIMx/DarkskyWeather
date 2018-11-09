@@ -14,7 +14,6 @@ public class WeatherNet {
     }
 
     public static Observable<Response<WeatherModel>> getWeather(double lat, double lon) {
-        return weatherService.getWeather(lat, lon)
-                .subscribeOn(Schedulers.io());
+        return weatherService.getWeather(lat, lon).subscribeOn(Schedulers.io());
     }
 }

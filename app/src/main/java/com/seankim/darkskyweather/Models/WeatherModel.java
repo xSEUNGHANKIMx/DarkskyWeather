@@ -11,9 +11,6 @@ public class WeatherModel {
     @SerializedName("longitude")
     @Expose
     private Double longitude;
-    //    @SerializedName("timezone")
-//    @Expose
-//    private String timezone;
     @SerializedName("currently")
     @Expose
     private CurrentlyWeatherModel currently;
@@ -37,14 +34,6 @@ public class WeatherModel {
         this.longitude = longitude;
     }
 
-    //    public String getTimezone() {
-//        return timezone;
-//    }
-//
-//    public void setTimezone(String timezone) {
-//        this.timezone = timezone;
-//    }
-//
     public CurrentlyWeatherModel getCurrently() {
         return currently;
     }

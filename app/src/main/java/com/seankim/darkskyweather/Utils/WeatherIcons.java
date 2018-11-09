@@ -7,24 +7,22 @@ import java.util.Map;
 
 public class WeatherIcons {
 
-    private static Map<String, Integer> iconMap = new HashMap<>();
+    private static Map<String, Integer> icons = new HashMap<>();
 
     static {
-        iconMap.put("clear-day", R.drawable.clear_day);
-        iconMap.put("clear-night", R.drawable.clear_night);
-        iconMap.put("rain", R.drawable.rain);
-        iconMap.put("snow", R.drawable.snow);
-        iconMap.put("sleet", R.drawable.sleet);
-        iconMap.put("windy", R.drawable.windy);
-        iconMap.put("fog", R.drawable.foggy);
-        iconMap.put("cloudy", R.drawable.cloudy);
-        iconMap.put("partly-cloudy-day", R.drawable.little_cloudy_day);
-        iconMap.put("partly-cloudy-night", R.drawable.little_cloudy_night);
-        iconMap.put("thunderstorm", R.drawable.stormy);
+        icons.put("clear-day", R.drawable.clear_day);
+        icons.put("clear-night", R.drawable.clear_night);
+        icons.put("rain", R.drawable.rain);
+        icons.put("snow", R.drawable.snow);
+        icons.put("sleet", R.drawable.sleet);
+        icons.put("windy", R.drawable.windy);
+        icons.put("fog", R.drawable.foggy);
+        icons.put("cloudy", R.drawable.cloudy);
+        icons.put("partly-cloudy-day", R.drawable.little_cloudy_day);
+        icons.put("partly-cloudy-night", R.drawable.little_cloudy_night);
+        icons.put("thunderstorm", R.drawable.stormy);
     }
 
     public static Integer getIconResource(String key) {
-        return iconMap.get(key);
-    }
-
+        return icons.get(key);    }
 }
